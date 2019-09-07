@@ -17,9 +17,12 @@ int main()
     // Submit a job to thread pool
 
     cout << "Main Thread: Submitting a job" << endl;
+
     string id = tp.push(job);
 
-    cout << " Main thread :: Is the job done? " << std::boolalpha << tp.is_done(id) << endl;
+    cout << "Main Thread :: Just submitted my job with id = " << id << endl;
+    std::this_thread::sleep_for(std::chrono::seconds(4));
+    cout << "Main thread :: Is the job done? " << std::boolalpha << tp.is_done(id) << endl;
     
     //Send a stop signal to the thread pool
     tp.terminate();

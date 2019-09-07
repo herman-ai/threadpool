@@ -30,7 +30,7 @@ public:
 
 private:
 
-    const int N = 1;
+    const int N = 16;
 
     set<string> completed_jobs;
 

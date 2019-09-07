@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <random>
 
 using namespace std;
 
@@ -21,7 +22,14 @@ thread_pool::~thread_pool() {
 }
 
 string  unique_id() {
-    return "abc";
+    // generate and eight character long unique identifier
+    
+    string s = "";
+    for (int i=0; i< 8; i++) {
+        int r = random() % 26;
+        s += char('a'+r);
+    }
+    return s;
 }
 
 string thread_pool::push(function<void()> f) {
