@@ -6,12 +6,15 @@
 #include <vector>
 #include <queue>
 #include <set>
+#include <string>
 
 using std::thread;
 using std::function;
 using std::vector;
 using std::queue;
 using std::set;
+using std::string;
+using std::pair;
 
 class thread_pool {
 
@@ -20,16 +23,17 @@ public:
     thread_pool();
     ~thread_pool();
 
-    int push(function<void()> f);
+    string push(function<void()> f);
+    bool is_done(string);
 
 private:
 
     const int N = 4;
 
-    set<function<void()>> completed_jobs;
+    set<string> completed_jobs;
 
     vector<thread> threads;
-    queue<function<void()>> tasks;
+    queue<pair<string, function<void()>>> tasks;
 
     std::mutex m;
     std::condition_variable cv;
