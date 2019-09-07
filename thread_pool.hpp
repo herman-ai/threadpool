@@ -7,6 +7,7 @@
 #include <queue>
 #include <set>
 #include <string>
+#include <atomic>
 
 using std::thread;
 using std::function;
@@ -25,10 +26,11 @@ public:
 
     string push(function<void()> f);
     bool is_done(string);
+    void terminate();
 
 private:
 
-    const int N = 4;
+    const int N = 1;
 
     set<string> completed_jobs;
 
@@ -37,6 +39,8 @@ private:
 
     std::mutex m;
     std::condition_variable cv;
+    std::atomic<int> active_threads;
+    bool stop;
 
     void looper();
 };
